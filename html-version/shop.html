@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda - Parfum.zip</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          boxShadow: {
+            'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+            'glow': '0 0 20px rgba(0, 0, 0, 0.1)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .text-gradient {
+      background: linear-gradient(to right, #000, #1f2937, #000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glass-effect {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .hover-lift {
+      transition: transform 0.3s;
+    }
+    .hover-lift:hover {
+      transform: translateY(-8px);
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-50 glass-effect border-b border-gray-100 shadow-soft">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="text-3xl font-bold text-gradient tracking-tight">
+          Parfum.zip
+        </a>
+
+        <div class="hidden md:flex items-center gap-10">
+          <a href="index.html" class="text-gray-700 hover:text-black transition-colors font-medium relative group">
+            Inicio
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+          </a>
+          <a href="shop.html" class="text-gray-700 hover:text-black transition-colors font-medium relative group">
+            Tienda
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+          </a>
+          <a href="contact.html" class="text-gray-700 hover:text-black transition-colors font-medium relative group">
+            Contacto
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+          </a>
+        </div>
+
+        <div class="flex items-center gap-6">
+          <a href="cart.html" class="relative group">
+            <svg class="h-6 w-6 text-gray-700 group-hover:text-black transition-all group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            <span id="cart-badge" class="absolute -top-2 -right-2 bg-gradient-to-r from-black to-gray-800 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center shadow-glow animate-pulse" style="display: none;">0</span>
+          </a>
+
+          <button class="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors" id="mobile-menu-btn" aria-label="Toggle menu">
+            <svg class="h-6 w-6" id="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="md:hidden py-6 border-t border-gray-100 hidden" id="mobile-menu">
+        <div class="flex flex-col gap-4">
+          <a href="index.html" class="text-gray-700 hover:text-black font-medium py-2">Inicio</a>
+          <a href="shop.html" class="text-gray-700 hover:text-black font-medium py-2">Tienda</a>
+          <a href="contact.html" class="text-gray-700 hover:text-black font-medium py-2">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container mx-auto px-4 py-12">
+    <div class="mb-12">
+      <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Catálogo completo</p>
+      <h1 class="text-5xl md:text-6xl font-bold text-gradient mb-4">Tienda</h1>
+      <p class="text-gray-600 text-lg">Decants auténticos de 5ml y 10ml. Prueba antes de comprar el frasco completo.</p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Filtros -->
+      <aside class="lg:w-64 flex-shrink-0">
+        <div class="space-y-6 bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-100 shadow-soft sticky top-24">
+          <div>
+            <label class="text-sm font-medium mb-2 block">Buscar</label>
+            <input type="text" id="search-input" placeholder="Nombre, marca..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+          </div>
+
+          <div>
+            <label class="text-sm font-medium mb-2 block">Marca</label>
+            <select id="brand-filter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+              <option value="all">Todas</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium mb-2 block">Género</label>
+            <select id="gender-filter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+              <option value="all">Todos</option>
+              <option value="Hombre">Hombre</option>
+              <option value="Mujer">Mujer</option>
+              <option value="Unisex">Unisex</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium mb-2 block">Familia</label>
+            <select id="family-filter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+              <option value="all">Todas</option>
+              <option value="Amaderado">Amaderado</option>
+              <option value="Ámbar">Ámbar</option>
+              <option value="Cítrico">Cítrico</option>
+              <option value="Floral">Floral</option>
+              <option value="Gourmand">Gourmand</option>
+              <option value="Acuático">Acuático</option>
+              <option value="Oriental">Oriental</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="text-sm font-medium mb-2 block">Precio</label>
+            <select id="price-filter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+              <option value="all">Todos</option>
+              <option value="0-250">Hasta $250</option>
+              <option value="250-350">$250 - $350</option>
+              <option value="350-450">$350 - $450</option>
+              <option value="450-">Más de $450</option>
+            </select>
+          </div>
+
+          <button id="clear-filters" class="text-sm text-gray-600 hover:text-black underline w-full text-left">
+            Limpiar filtros
+          </button>
+        </div>
+      </aside>
+
+      <!-- Productos -->
+      <main class="flex-1">
+        <div class="flex justify-between items-center mb-6">
+          <p class="text-gray-600" id="product-count">0 productos</p>
+          <select id="sort-select" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+            <option value="default">Por defecto</option>
+            <option value="price-asc">Precio: menor a mayor</option>
+            <option value="price-desc">Precio: mayor a menor</option>
+            <option value="new">Más nuevos</option>
+            <option value="bestseller">Más vendidos</option>
+          </select>
+        </div>
+
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Los productos se cargarán aquí -->
+        </div>
+
+        <div id="no-products" class="text-center py-20 hidden">
+          <p class="text-gray-500 text-lg">No se encontraron productos</p>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-b from-black to-gray-900 text-white mt-32 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.02\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
+    <div class="container mx-auto px-4 py-16 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div>
+          <h3 class="text-2xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Parfum.zip</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Fragancias premium y exclusivas para los amantes del perfume. 
+            Cada fragancia cuenta una historia única.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-6 text-white">Enlaces</h4>
+          <ul class="space-y-3 text-gray-400 text-sm">
+            <li><a href="index.html" class="hover:text-white transition-colors flex items-center gap-2 group"><span class="w-0 h-0.5 bg-white group-hover:w-4 transition-all"></span>Inicio</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors flex items-center gap-2 group"><span class="w-0 h-0.5 bg-white group-hover:w-4 transition-all"></span>Tienda</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors flex items-center gap-2 group"><span class="w-0 h-0.5 bg-white group-hover:w-4 transition-all"></span>Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-6 text-white">Información</h4>
+          <ul class="space-y-3 text-gray-400 text-sm">
+            <li class="flex items-center gap-2"><span class="text-white">✓</span>Envío gratuito</li>
+            <li class="flex items-center gap-2"><span class="text-white">✓</span>Productos auténticos</li>
+            <li class="flex items-center gap-2"><span class="text-white">✓</span>Soporte 24/7</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-6 text-white">Contacto</h4>
+          <ul class="space-y-3 text-gray-400 text-sm">
+            <li>
+              <span class="text-gray-500">Email:</span><br>
+              <a href="mailto:contacto@parfum.zip" class="hover:text-white transition-colors">contacto@parfum.zip</a>
+            </li>
+            <li>
+              <span class="text-gray-500">Ubicación:</span><br>
+              Ciudad de México, México
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-16 pt-8 border-t border-gray-800 text-center">
+        <p class="text-gray-500 text-sm">
+          &copy; <span id="current-year"></span> Parfum.zip. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Mobile menu
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden')
+    })
+    document.getElementById('current-year').textContent = new Date().getFullYear()
+
+    // Filtros
+    let search = ''
+    let selectedBrand = 'all'
+    let selectedGender = 'all'
+    let selectedFamily = 'all'
+    let priceRange = 'all'
+    let sortBy = 'default'
+    let urlFilter = ''
+
+    // Obtener filtro de URL
+    const params = new URLSearchParams(window.location.search)
+    urlFilter = params.get('filter') || ''
+
+    // Cargar marcas
+    const brands = [...new Set(products.map(p => p.brand))].sort()
+    const brandSelect = document.getElementById('brand-filter')
+    brands.forEach(brand => {
+      const option = document.createElement('option')
+      option.value = brand
+      option.textContent = brand
+      brandSelect.appendChild(option)
+    })
+
+    function renderProductCard(product) {
+      const minPrice = Math.min(...product.sizes.map(s => s.price))
+      const maxPrice = Math.max(...product.sizes.map(s => s.price))
+      const minSize = Math.min(...product.sizes.map(s => s.ml))
+      const maxSize = Math.max(...product.sizes.map(s => s.ml))
+      
+      return `
+        <div class="group overflow-hidden hover:shadow-glow transition-all duration-300 hover-lift border-0 shadow-soft rounded-lg bg-white">
+          <a href="product.html?id=${product.id}">
+            <div class="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+              <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              ${product.isNew ? `<span class="absolute top-3 left-3 bg-gradient-to-r from-black to-gray-800 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">✨ Nuevo</span>` : ''}
+              ${product.isBestSeller ? `<span class="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-black text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg border border-gray-200">⭐ Más vendido</span>` : ''}
+            </div>
+          </a>
+          <div class="p-6">
+            <a href="product.html?id=${product.id}">
+              <p class="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">${product.brand}</p>
+              <h3 class="font-bold text-xl mb-3 line-clamp-2 group-hover:text-gray-600 transition-colors min-h-[3rem]">${product.name}</h3>
+            </a>
+            <div class="flex items-end justify-between mb-4">
+              <div>
+                ${minPrice === maxPrice ? `<p class="text-2xl font-bold text-black">${formatCurrency(minPrice)}</p>` : `<p class="text-2xl font-bold text-black">${formatCurrency(minPrice)} - ${formatCurrency(maxPrice)}</p>`}
+                <p class="text-xs text-gray-500 mt-1 font-semibold">Decant ${minSize}ml / ${maxSize}ml</p>
+              </div>
+            </div>
+            <a href="product.html?id=${product.id}" class="w-full gap-2 bg-black hover:bg-gray-800 text-white font-semibold h-11 transition-all hover:scale-105 shadow-lg hover:shadow-xl rounded-lg flex items-center justify-center">
+              Ver detalles
+            </a>
+          </div>
+        </div>
+      `
+    }
+
+    function filterAndSort() {
+      let filtered = [...products]
+
+      // Filtro de URL
+      if (urlFilter === 'new') {
+        filtered = filtered.filter(p => p.isNew)
+      } else if (urlFilter === 'bestseller') {
+        filtered = filtered.filter(p => p.isBestSeller)
+      } else if (urlFilter === 'sale') {
+        filtered = filtered.filter(p => p.discountPercent)
+      }
+
+      // Búsqueda
+      if (search) {
+        const searchLower = search.toLowerCase()
+        filtered = filtered.filter(p => 
+          p.name.toLowerCase().includes(searchLower) || 
+          p.brand.toLowerCase().includes(searchLower)
+        )
+      }
+
+      // Filtros
+      if (selectedBrand !== 'all') {
+        filtered = filtered.filter(p => p.brand === selectedBrand)
+      }
+      if (selectedGender !== 'all') {
+        filtered = filtered.filter(p => p.gender === selectedGender)
+      }
+      if (selectedFamily !== 'all') {
+        filtered = filtered.filter(p => p.family === selectedFamily)
+      }
+      if (priceRange !== 'all') {
+        const [min, max] = priceRange.split('-').map(Number)
+        filtered = filtered.filter(p => {
+          const minPrice = Math.min(...p.sizes.map(s => s.price))
+          const price = p.discountPercent ? minPrice * (1 - p.discountPercent / 100) : minPrice
+          return price >= min && (max ? price <= max : true)
+        })
+      }
+
+      // Ordenar
+      if (sortBy === 'price-asc') {
+        filtered.sort((a, b) => {
+          const minPriceA = Math.min(...a.sizes.map(s => s.price))
+          const minPriceB = Math.min(...b.sizes.map(s => s.price))
+          const priceA = a.discountPercent ? minPriceA * (1 - a.discountPercent / 100) : minPriceA
+          const priceB = b.discountPercent ? minPriceB * (1 - b.discountPercent / 100) : minPriceB
+          return priceA - priceB
+        })
+      } else if (sortBy === 'price-desc') {
+        filtered.sort((a, b) => {
+          const minPriceA = Math.min(...a.sizes.map(s => s.price))
+          const minPriceB = Math.min(...b.sizes.map(s => s.price))
+          const priceA = a.discountPercent ? minPriceA * (1 - a.discountPercent / 100) : minPriceA
+          const priceB = b.discountPercent ? minPriceB * (1 - b.discountPercent / 100) : minPriceB
+          return priceB - priceA
+        })
+      } else if (sortBy === 'new') {
+        filtered.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0))
+      } else if (sortBy === 'bestseller') {
+        filtered.sort((a, b) => (b.isBestSeller ? 1 : 0) - (a.isBestSeller ? 1 : 0))
+      }
+
+      // Renderizar
+      const grid = document.getElementById('products-grid')
+      const noProducts = document.getElementById('no-products')
+      const count = document.getElementById('product-count')
+
+      if (filtered.length === 0) {
+        grid.innerHTML = ''
+        grid.classList.add('hidden')
+        noProducts.classList.remove('hidden')
+        count.textContent = '0 productos'
+      } else {
+        grid.classList.remove('hidden')
+        noProducts.classList.add('hidden')
+        grid.innerHTML = filtered.map(renderProductCard).join('')
+        count.textContent = `${filtered.length} ${filtered.length === 1 ? 'producto' : 'productos'}`
+      }
+    }
+
+    // Event listeners
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      search = e.target.value
+      filterAndSort()
+    })
+    document.getElementById('brand-filter').addEventListener('change', (e) => {
+      selectedBrand = e.target.value
+      filterAndSort()
+    })
+    document.getElementById('gender-filter').addEventListener('change', (e) => {
+      selectedGender = e.target.value
+      filterAndSort()
+    })
+    document.getElementById('family-filter').addEventListener('change', (e) => {
+      selectedFamily = e.target.value
+      filterAndSort()
+    })
+    document.getElementById('price-filter').addEventListener('change', (e) => {
+      priceRange = e.target.value
+      filterAndSort()
+    })
+    document.getElementById('sort-select').addEventListener('change', (e) => {
+      sortBy = e.target.value
+      filterAndSort()
+    })
+    document.getElementById('clear-filters').addEventListener('click', () => {
+      search = ''
+      selectedBrand = 'all'
+      selectedGender = 'all'
+      selectedFamily = 'all'
+      priceRange = 'all'
+      sortBy = 'default'
+      document.getElementById('search-input').value = ''
+      document.getElementById('brand-filter').value = 'all'
+      document.getElementById('gender-filter').value = 'all'
+      document.getElementById('family-filter').value = 'all'
+      document.getElementById('price-filter').value = 'all'
+      document.getElementById('sort-select').value = 'default'
+      filterAndSort()
+    })
+
+    // Inicializar
+    filterAndSort()
+  </script>
+</body>
+</html>

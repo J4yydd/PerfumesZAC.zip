@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - Parfum.zip</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          boxShadow: {
+            'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+            'glow': '0 0 20px rgba(0, 0, 0, 0.1)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .text-gradient {
+      background: linear-gradient(to right, #000, #1f2937, #000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glass-effect {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .hover-lift {
+      transition: transform 0.3s;
+    }
+    .hover-lift:hover {
+      transform: translateY(-8px);
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-50 glass-effect border-b border-gray-100 shadow-soft">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="text-3xl font-bold text-gradient tracking-tight">
+          Parfum.zip
+        </a>
+
+        <div class="hidden md:flex items-center gap-10">
+          <a href="index.html" class="text-gray-700 hover:text-black transition-colors font-medium relative group">
+            Inicio
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+          </a>
+          <a href="shop.html" class="text-gray-700 hover:text-black transition-colors font-medium relative group">
+            Tienda
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+          </a>
+          <a href="contact.html" class="text-gray-700 hover:text-black transition-colors font-medium relative group">
+            Contacto
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+          </a>
+        </div>
+
+        <div class="flex items-center gap-6">
+          <a href="cart.html" class="relative group">
+            <svg class="h-6 w-6 text-gray-700 group-hover:text-black transition-all group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            <span id="cart-badge" class="absolute -top-2 -right-2 bg-gradient-to-r from-black to-gray-800 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center shadow-glow animate-pulse" style="display: none;">0</span>
+          </a>
+
+          <button class="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors" id="mobile-menu-btn" aria-label="Toggle menu">
+            <svg class="h-6 w-6" id="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="md:hidden py-6 border-t border-gray-100 hidden" id="mobile-menu">
+        <div class="flex flex-col gap-4">
+          <a href="index.html" class="text-gray-700 hover:text-black font-medium py-2">Inicio</a>
+          <a href="shop.html" class="text-gray-700 hover:text-black font-medium py-2">Tienda</a>
+          <a href="contact.html" class="text-gray-700 hover:text-black font-medium py-2">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contact Content -->
+  <div class="container mx-auto px-4 py-12">
+    <div class="mb-16 text-center">
+      <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Conecta con nosotros</p>
+      <h1 class="text-5xl md:text-6xl font-bold text-gradient mb-4">Contacto</h1>
+      <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+        ¿Tienes alguna pregunta? Contáctanos a través de nuestras redes sociales.
+      </p>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <!-- WhatsApp Card -->
+        <div class="group overflow-hidden border-2 border-gray-100 shadow-soft hover:shadow-glow transition-all duration-300 hover-lift bg-gradient-to-br from-green-50 to-white rounded-lg">
+          <div class="p-8">
+            <div class="flex flex-col items-center text-center">
+              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold mb-3 text-gray-900">WhatsApp</h3>
+              <p class="text-gray-600 mb-2">Escríbenos directamente</p>
+              <p class="text-lg font-semibold text-gray-800 mb-6">494 112 53 52</p>
+              <button onclick="handleWhatsApp()" type="button" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold shadow-xl hover:shadow-2xl hover:scale-105 transition-all h-12 rounded-lg flex items-center justify-center gap-2 cursor-pointer">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                </svg>
+                Abrir WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instagram Card -->
+        <div class="group overflow-hidden border-2 border-gray-100 shadow-soft hover:shadow-glow transition-all duration-300 hover-lift bg-gradient-to-br from-pink-50 via-purple-50 to-orange-50 rounded-lg">
+          <div class="p-8">
+            <div class="flex flex-col items-center text-center">
+              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                <svg class="h-10 w-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.98-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.98-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold mb-3 text-gray-900">Instagram</h3>
+              <p class="text-gray-600 mb-2">Síguenos y contáctanos</p>
+              <p class="text-lg font-semibold text-gray-800 mb-6">@jayyd.zip</p>
+              <button onclick="handleInstagram()" type="button" class="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 hover:from-purple-600 hover:via-pink-600 hover:to-orange-600 text-white font-semibold shadow-xl hover:shadow-2xl hover:scale-105 transition-all h-12 rounded-lg flex items-center justify-center gap-2 cursor-pointer">
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.98-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.98-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+                </svg>
+                Ver perfil
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Información adicional -->
+      <div class="border-2 border-gray-100 shadow-soft bg-gradient-to-br from-gray-50 to-white rounded-lg">
+        <div class="p-8">
+          <div class="text-center">
+            <h3 class="text-2xl font-bold mb-4 text-gradient">¿Cómo podemos ayudarte?</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+              <div class="p-4">
+                <div class="w-12 h-12 rounded-full bg-black/10 flex items-center justify-center mx-auto mb-3">
+                  <svg class="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                  </svg>
+                </div>
+                <h4 class="font-semibold mb-2">Consulta rápida</h4>
+                <p class="text-sm text-gray-600">Escríbenos por WhatsApp para una respuesta inmediata</p>
+              </div>
+              <div class="p-4">
+                <div class="w-12 h-12 rounded-full bg-black/10 flex items-center justify-center mx-auto mb-3">
+                  <svg class="h-6 w-6 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.98-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.98-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+                  </svg>
+                </div>
+                <h4 class="font-semibold mb-2">Síguenos</h4>
+                <p class="text-sm text-gray-600">Mantente al día con nuestras novedades y ofertas</p>
+              </div>
+              <div class="p-4">
+                <div class="w-12 h-12 rounded-full bg-black/10 flex items-center justify-center mx-auto mb-3">
+                  <svg class="h-6 w-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <h4 class="font-semibold mb-2">Atención personalizada</h4>
+                <p class="text-sm text-gray-600">Te ayudamos a encontrar la fragancia perfecta</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-b from-black to-gray-900 text-white mt-32 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.02\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
+    <div class="container mx-auto px-4 py-16 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div>
+          <h3 class="text-2xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Parfum.zip</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Fragancias premium y exclusivas para los amantes del perfume. 
+            Cada fragancia cuenta una historia única.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-6 text-white">Enlaces</h4>
+          <ul class="space-y-3 text-gray-400 text-sm">
+            <li><a href="index.html" class="hover:text-white transition-colors flex items-center gap-2 group"><span class="w-0 h-0.5 bg-white group-hover:w-4 transition-all"></span>Inicio</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors flex items-center gap-2 group"><span class="w-0 h-0.5 bg-white group-hover:w-4 transition-all"></span>Tienda</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors flex items-center gap-2 group"><span class="w-0 h-0.5 bg-white group-hover:w-4 transition-all"></span>Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-6 text-white">Información</h4>
+          <ul class="space-y-3 text-gray-400 text-sm">
+            <li class="flex items-center gap-2"><span class="text-white">✓</span>Envío gratuito</li>
+            <li class="flex items-center gap-2"><span class="text-white">✓</span>Productos auténticos</li>
+            <li class="flex items-center gap-2"><span class="text-white">✓</span>Soporte 24/7</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-6 text-white">Contacto</h4>
+          <ul class="space-y-3 text-gray-400 text-sm">
+            <li>
+              <span class="text-gray-500">Email:</span><br>
+              <a href="mailto:contacto@parfum.zip" class="hover:text-white transition-colors">contacto@parfum.zip</a>
+            </li>
+            <li>
+              <span class="text-gray-500">Ubicación:</span><br>
+              Ciudad de México, México
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-16 pt-8 border-t border-gray-800 text-center">
+        <p class="text-gray-500 text-sm">
+          &copy; <span id="current-year"></span> Parfum.zip. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Mobile menu
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden')
+    })
+    document.getElementById('current-year').textContent = new Date().getFullYear()
+
+    const whatsappNumber = '524941125352'
+    const instagramUsername = 'jayyd.zip'
+
+    function handleWhatsApp(e) {
+      if (e) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+      const message = 'Hola! Me interesa contactar contigo.'
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
+    }
+
+    function handleInstagram(e) {
+      if (e) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+      window.open(`https://instagram.com/${instagramUsername}`, '_blank', 'noopener,noreferrer')
+    }
+  </script>
+</body>
+</html>
+

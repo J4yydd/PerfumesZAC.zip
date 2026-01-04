@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Producto - Parfum.zip</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          boxShadow: {
+            'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+            'glow': '0 0 20px rgba(0, 0, 0, 0.1)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .text-gradient {
+      background: linear-gradient(to right, #000, #1f2937, #000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glass-effect {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .hover-lift {
+      transition: transform 0.3s;
+    }
+    .hover-lift:hover {
+      transform: translateY(-8px);
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-50 glass-effect border-b border-gray-100 shadow-soft">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="text-3xl font-bold text-gradient tracking-tight">
+          Parfum.zip
+        </a>
+
+        <div class="hidden md:flex items-center gap-10">
+          <a href="index.html" class="text-gray-700 hover:text-black transition-colors font-medium relative group">
+            Inicio
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+          </a>
+          <a href="shop.html" class="text-gray-700 hover:text-black transition-colors font-medium relative group">
+            Tienda
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+          </a>
+          <a href="contact.html" class="text-gray-700 hover:text-black transition-colors font-medium relative group">
+            Contacto
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+          </a>
+        </div>
+
+        <div class="flex items-center gap-6">
+          <a href="cart.html" class="relative group">
+            <svg class="h-6 w-6 text-gray-700 group-hover:text-black transition-all group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            <span id="cart-badge" class="absolute -top-2 -right-2 bg-gradient-to-r from-black to-gray-800 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center shadow-glow animate-pulse" style="display: none;">0</span>
+          </a>
+
+          <button class="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors" id="mobile-menu-btn" aria-label="Toggle menu">
+            <svg class="h-6 w-6" id="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="md:hidden py-6 border-t border-gray-100 hidden" id="mobile-menu">
+        <div class="flex flex-col gap-4">
+          <a href="index.html" class="text-gray-700 hover:text-black font-medium py-2">Inicio</a>
+          <a href="shop.html" class="text-gray-700 hover:text-black font-medium py-2">Tienda</a>
+          <a href="contact.html" class="text-gray-700 hover:text-black font-medium py-2">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Product Content -->
+  <div class="container mx-auto px-4 py-12" id="product-content">
+    <p class="text-center py-20">Cargando producto...</p>
+  </div>
+
+  <!-- Related Products -->
+  <div class="container mx-auto px-4 py-12" id="related-section" style="display: none;">
+    <div class="mb-12">
+      <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">También te puede interesar</p>
+      <h2 class="text-4xl font-bold text-gradient">Productos relacionados</h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="related-products"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-b from-black to-gray-900 text-white mt-32 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.02\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
+    <div class="container mx-auto px-4 py-16 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div>
+          <h3 class="text-2xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Parfum.zip</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Fragancias premium y exclusivas para los amantes del perfume. 
+            Cada fragancia cuenta una historia única.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-6 text-white">Enlaces</h4>
+          <ul class="space-y-3 text-gray-400 text-sm">
+            <li><a href="index.html" class="hover:text-white transition-colors flex items-center gap-2 group"><span class="w-0 h-0.5 bg-white group-hover:w-4 transition-all"></span>Inicio</a></li>
+            <li><a href="shop.html" class="hover:text-white transition-colors flex items-center gap-2 group"><span class="w-0 h-0.5 bg-white group-hover:w-4 transition-all"></span>Tienda</a></li>
+            <li><a href="contact.html" class="hover:text-white transition-colors flex items-center gap-2 group"><span class="w-0 h-0.5 bg-white group-hover:w-4 transition-all"></span>Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-6 text-white">Información</h4>
+          <ul class="space-y-3 text-gray-400 text-sm">
+            <li class="flex items-center gap-2"><span class="text-white">✓</span>Envío gratuito</li>
+            <li class="flex items-center gap-2"><span class="text-white">✓</span>Productos auténticos</li>
+            <li class="flex items-center gap-2"><span class="text-white">✓</span>Soporte 24/7</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-6 text-white">Contacto</h4>
+          <ul class="space-y-3 text-gray-400 text-sm">
+            <li>
+              <span class="text-gray-500">Email:</span><br>
+              <a href="mailto:contacto@parfum.zip" class="hover:text-white transition-colors">contacto@parfum.zip</a>
+            </li>
+            <li>
+              <span class="text-gray-500">Ubicación:</span><br>
+              Ciudad de México, México
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-16 pt-8 border-t border-gray-800 text-center">
+        <p class="text-gray-500 text-sm">
+          &copy; <span id="current-year"></span> Parfum.zip. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Mobile menu
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden')
+    })
+    document.getElementById('current-year').textContent = new Date().getFullYear()
+
+    // Obtener ID del producto
+    const params = new URLSearchParams(window.location.search)
+    const productId = params.get('id')
+    
+    if (!productId) {
+      document.getElementById('product-content').innerHTML = '<p class="text-center py-20 text-red-500">Producto no encontrado</p>'
+    } else {
+      const product = products.find(p => p.id === productId)
+      
+      if (!product) {
+        document.getElementById('product-content').innerHTML = '<p class="text-center py-20 text-red-500">Producto no encontrado</p>'
+      } else {
+        // Renderizar producto
+        let selectedSize = product.sizes[0].ml
+        let quantity = 1
+
+        function renderProduct() {
+          const selectedSizeData = product.sizes.find(s => s.ml === selectedSize)
+          const finalPrice = selectedSizeData ? (product.discountPercent ? selectedSizeData.price * (1 - product.discountPercent / 100) : selectedSizeData.price) : 0
+
+          document.getElementById('product-content').innerHTML = `
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+              <div class="relative aspect-square overflow-hidden rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 shadow-2xl group">
+                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </div>
+
+              <div>
+                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">${product.brand}</p>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gradient leading-tight">${product.name}</h1>
+
+                <div class="mb-8 grid grid-cols-2 gap-4">
+                  <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Género</p>
+                    <p class="font-semibold text-lg">${product.gender}</p>
+                  </div>
+                  <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
+                    <p class="text-xs text-gray-500 uppercase tracking-wider mb-1">Familia</p>
+                    <p class="font-semibold text-lg">${product.family}</p>
+                  </div>
+                </div>
+
+                <div class="mb-10">
+                  <h3 class="font-bold text-xl mb-6">Notas olfativas</h3>
+                  <div class="space-y-4">
+                    <div class="p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg border border-amber-100">
+                      <p class="text-xs font-semibold text-amber-700 uppercase tracking-wider mb-2">Salida</p>
+                      <p class="text-gray-700">${product.notesTop.join(' • ')}</p>
+                    </div>
+                    <div class="p-4 bg-gradient-to-r from-pink-50 to-rose-50 rounded-lg border border-pink-100">
+                      <p class="text-xs font-semibold text-pink-700 uppercase tracking-wider mb-2">Corazón</p>
+                      <p class="text-gray-700">${product.notesHeart.join(' • ')}</p>
+                    </div>
+                    <div class="p-4 bg-gradient-to-r from-gray-50 to-slate-50 rounded-lg border border-gray-100">
+                      <p class="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">Fondo</p>
+                      <p class="text-gray-700">${product.notesBase.join(' • ')}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <div>
+                    <label class="text-sm font-semibold text-gray-700 mb-2 block">Selecciona el tamaño:</label>
+                    <div class="grid grid-cols-2 gap-3">
+                      ${product.sizes.map(size => {
+                        const sizePrice = product.discountPercent ? size.price * (1 - product.discountPercent / 100) : size.price
+                        const isSelected = selectedSize === size.ml
+                        return `
+                          <button onclick="selectedSize = ${size.ml}; renderProduct();" class="p-4 rounded-xl border-2 transition-all ${isSelected ? 'border-black bg-black text-white shadow-lg' : 'border-gray-200 hover:border-gray-300 bg-white'}">
+                            <div class="font-bold text-lg mb-1">${size.ml}ml</div>
+                            <div class="text-sm ${isSelected ? 'text-gray-200' : 'text-gray-600'}">${formatCurrency(sizePrice)}</div>
+                          </button>
+                        `
+                      }).join('')}
+                    </div>
+                  </div>
+
+                  <div class="flex gap-4 items-center">
+                    <div class="flex items-center gap-2 border-2 border-gray-200 rounded-lg p-1">
+                      <button onclick="if(quantity > 1) { quantity--; document.getElementById('quantity-input').value = quantity; }" class="h-10 w-10 hover:bg-gray-100 rounded flex items-center justify-center">-</button>
+                      <input type="number" id="quantity-input" min="1" value="${quantity}" onchange="quantity = Math.max(1, parseInt(this.value) || 1); this.value = quantity;" class="w-16 text-center border-0 focus:outline-none font-semibold">
+                      <button onclick="quantity++; document.getElementById('quantity-input').value = quantity;" class="h-10 w-10 hover:bg-gray-100 rounded flex items-center justify-center">+</button>
+                    </div>
+                    <button onclick="cart.addToCart('${product.id}', selectedSize, quantity); alert('Producto agregado al carrito'); quantity = 1; document.getElementById('quantity-input').value = 1;" class="flex-1 gap-2 bg-gradient-to-r from-black to-gray-800 hover:from-gray-800 hover:to-black text-white font-semibold shadow-xl hover:shadow-2xl hover:scale-105 transition-all h-12 rounded-lg flex items-center justify-center">
+                      <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                      </svg>
+                      Agregar al carrito
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `
+        }
+
+        renderProduct()
+
+        // Productos relacionados
+        const relatedProducts = products
+          .filter(p => p.id !== product.id && p.name !== product.name && (p.family === product.family || p.brand === product.brand))
+          .slice(0, 4)
+
+        if (relatedProducts.length > 0) {
+          document.getElementById('related-section').style.display = 'block'
+          document.getElementById('related-products').innerHTML = relatedProducts.map(p => {
+            const minPrice = Math.min(...p.sizes.map(s => s.price))
+            const maxPrice = Math.max(...p.sizes.map(s => s.price))
+            const minSize = Math.min(...p.sizes.map(s => s.ml))
+            const maxSize = Math.max(...p.sizes.map(s => s.ml))
+            return `
+              <div class="group overflow-hidden hover:shadow-glow transition-all duration-300 hover-lift border-0 shadow-soft rounded-lg bg-white">
+                <a href="product.html?id=${p.id}">
+                  <div class="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                    <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </a>
+                <div class="p-6">
+                  <a href="product.html?id=${p.id}">
+                    <p class="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">${p.brand}</p>
+                    <h3 class="font-bold text-xl mb-3 line-clamp-2 group-hover:text-gray-600 transition-colors min-h-[3rem]">${p.name}</h3>
+                  </a>
+                  <div class="mb-4">
+                    ${minPrice === maxPrice ? `<p class="text-2xl font-bold text-black">${formatCurrency(minPrice)}</p>` : `<p class="text-2xl font-bold text-black">${formatCurrency(minPrice)} - ${formatCurrency(maxPrice)}</p>`}
+                    <p class="text-xs text-gray-500 mt-1 font-semibold">Decant ${minSize}ml / ${maxSize}ml</p>
+                  </div>
+                  <a href="product.html?id=${p.id}" class="w-full gap-2 bg-black hover:bg-gray-800 text-white font-semibold h-11 transition-all hover:scale-105 shadow-lg hover:shadow-xl rounded-lg flex items-center justify-center">
+                    Ver detalles
+                  </a>
+                </div>
+              </div>
+            `
+          }).join('')
+        }
+      }
+    }
+  </script>
+</body>
+</html>
+
