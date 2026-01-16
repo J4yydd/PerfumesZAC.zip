@@ -364,26 +364,182 @@ body {
 }
 
 .product-image {
-    height: 220px;
-    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+    width: 100%;
+    aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
+    padding: 0;
+    border-radius: 12px 12px 0 0;
+}
+
+/* Fondos personalizados por perfume basados en sus notas */
+
+/* Invictus Victory Elixir - Dulce, cálido (Vainilla, Tonka) - Dorado/Ámbar */
+.perfume-bg-elixir {
+    background: linear-gradient(135deg, rgba(40, 30, 15, 0.85) 0%, rgba(60, 45, 25, 0.88) 50%, rgba(50, 35, 20, 0.85) 100%);
+    background-image: 
+        radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.15) 0%, transparent 70%),
+        radial-gradient(circle at 70% 60%, rgba(184, 134, 29, 0.12) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(40, 30, 15, 0.85) 0%, rgba(60, 45, 25, 0.88) 50%, rgba(50, 35, 20, 0.85) 100%);
+    filter: blur(0.5px);
+}
+
+.product-card:hover .perfume-bg-elixir {
+    background: linear-gradient(135deg, rgba(50, 38, 20, 0.9) 0%, rgba(70, 55, 32, 0.92) 50%, rgba(60, 45, 28, 0.9) 100%);
+    background-image: 
+        radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.22) 0%, transparent 70%),
+        radial-gradient(circle at 70% 60%, rgba(184, 134, 29, 0.18) 0%, transparent 70%);
+    filter: blur(0.3px);
+}
+
+/* Le Beau - Tropical (Coco, Almendra) - Azul Turquesa/Verde Tropical */
+.perfume-bg-lebeau {
+    background: linear-gradient(135deg, rgba(15, 40, 50, 0.85) 0%, rgba(20, 55, 65, 0.88) 50%, rgba(18, 45, 55, 0.85) 100%);
+    background-image: 
+        radial-gradient(circle at 25% 50%, rgba(64, 224, 208, 0.12) 0%, transparent 70%),
+        radial-gradient(circle at 75% 50%, rgba(32, 178, 170, 0.1) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(15, 40, 50, 0.85) 0%, rgba(20, 55, 65, 0.88) 50%, rgba(18, 45, 55, 0.85) 100%);
+    filter: blur(0.5px);
+}
+
+.product-card:hover .perfume-bg-lebeau {
+    background: linear-gradient(135deg, rgba(20, 50, 60, 0.9) 0%, rgba(25, 65, 75, 0.92) 50%, rgba(22, 55, 65, 0.9) 100%);
+    background-image: 
+        radial-gradient(circle at 25% 50%, rgba(64, 224, 208, 0.18) 0%, transparent 70%),
+        radial-gradient(circle at 75% 50%, rgba(32, 178, 170, 0.15) 0%, transparent 70%);
+    filter: blur(0.3px);
+}
+
+/* Azzaro The Most Wanted Intense - Especiado, intenso (Ron, Caramelo) - Rojo/Borgoña */
+.perfume-bg-azzaro {
+    background: linear-gradient(135deg, rgba(50, 15, 15, 0.85) 0%, rgba(70, 20, 20, 0.88) 50%, rgba(60, 18, 18, 0.85) 100%);
+    background-image: 
+        radial-gradient(circle at 30% 45%, rgba(139, 0, 0, 0.15) 0%, transparent 70%),
+        radial-gradient(circle at 70% 55%, rgba(178, 34, 34, 0.12) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(50, 15, 15, 0.85) 0%, rgba(70, 20, 20, 0.88) 50%, rgba(60, 18, 18, 0.85) 100%);
+    filter: blur(0.5px);
+}
+
+.product-card:hover .perfume-bg-azzaro {
+    background: linear-gradient(135deg, rgba(60, 20, 20, 0.9) 0%, rgba(80, 28, 28, 0.92) 50%, rgba(70, 24, 24, 0.9) 100%);
+    background-image: 
+        radial-gradient(circle at 30% 45%, rgba(139, 0, 0, 0.22) 0%, transparent 70%),
+        radial-gradient(circle at 70% 55%, rgba(178, 34, 34, 0.18) 0%, transparent 70%);
+    filter: blur(0.3px);
+}
+
+/* Invictus Victory - Acuático, fresco - Azul Marino/Verde Azulado */
+.perfume-bg-invictus {
+    background: linear-gradient(135deg, rgba(15, 30, 50, 0.85) 0%, rgba(20, 45, 70, 0.88) 50%, rgba(18, 38, 60, 0.85) 100%);
+    background-image: 
+        radial-gradient(circle at 25% 50%, rgba(30, 144, 255, 0.14) 0%, transparent 70%),
+        radial-gradient(circle at 75% 50%, rgba(0, 191, 255, 0.12) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(15, 30, 50, 0.85) 0%, rgba(20, 45, 70, 0.88) 50%, rgba(18, 38, 60, 0.85) 100%);
+    filter: blur(0.5px);
+}
+
+.product-card:hover .perfume-bg-invictus {
+    background: linear-gradient(135deg, rgba(20, 38, 60, 0.9) 0%, rgba(25, 55, 80, 0.92) 50%, rgba(22, 46, 70, 0.9) 100%);
+    background-image: 
+        radial-gradient(circle at 25% 50%, rgba(30, 144, 255, 0.2) 0%, transparent 70%),
+        radial-gradient(circle at 75% 50%, rgba(0, 191, 255, 0.17) 0%, transparent 70%);
+    filter: blur(0.3px);
+}
+
+/* 1 Million Royale - Amaderado, cálido - Marrón Dorado/Ámbar */
+.perfume-bg-million {
+    background: linear-gradient(135deg, rgba(45, 35, 20, 0.85) 0%, rgba(65, 50, 30, 0.88) 50%, rgba(55, 42, 25, 0.85) 100%);
+    background-image: 
+        radial-gradient(circle at 30% 45%, rgba(184, 134, 29, 0.18) 0%, transparent 70%),
+        radial-gradient(circle at 70% 55%, rgba(212, 175, 55, 0.14) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(45, 35, 20, 0.85) 0%, rgba(65, 50, 30, 0.88) 50%, rgba(55, 42, 25, 0.85) 100%);
+    filter: blur(0.5px);
+}
+
+.product-card:hover .perfume-bg-million {
+    background: linear-gradient(135deg, rgba(55, 42, 25, 0.9) 0%, rgba(75, 58, 38, 0.92) 50%, rgba(65, 50, 32, 0.9) 100%);
+    background-image: 
+        radial-gradient(circle at 30% 45%, rgba(184, 134, 29, 0.25) 0%, transparent 70%),
+        radial-gradient(circle at 70% 55%, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
+    filter: blur(0.3px);
+}
+
+/* Hawas - Acuático, cítrico - Azul Claro/Cyan */
+.perfume-bg-hawas {
+    background: linear-gradient(135deg, rgba(10, 40, 60, 0.85) 0%, rgba(15, 60, 85, 0.88) 50%, rgba(12, 50, 72, 0.85) 100%);
+    background-image: 
+        radial-gradient(circle at 28% 48%, rgba(0, 255, 255, 0.14) 0%, transparent 70%),
+        radial-gradient(circle at 72% 52%, rgba(64, 224, 208, 0.12) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(10, 40, 60, 0.85) 0%, rgba(15, 60, 85, 0.88) 50%, rgba(12, 50, 72, 0.85) 100%);
+    filter: blur(0.5px);
+}
+
+.product-card:hover .perfume-bg-hawas {
+    background: linear-gradient(135deg, rgba(15, 50, 70, 0.9) 0%, rgba(20, 70, 95, 0.92) 50%, rgba(17, 60, 82, 0.9) 100%);
+    background-image: 
+        radial-gradient(circle at 28% 48%, rgba(0, 255, 255, 0.2) 0%, transparent 70%),
+        radial-gradient(circle at 72% 52%, rgba(64, 224, 208, 0.18) 0%, transparent 70%);
+    filter: blur(0.3px);
+}
+
+/* Nautica Voyage - Muy acuático - Azul Profundo/Océano */
+.perfume-bg-nautica {
+    background: linear-gradient(135deg, rgba(5, 25, 45, 0.85) 0%, rgba(10, 40, 70, 0.88) 50%, rgba(8, 32, 57, 0.85) 100%);
+    background-image: 
+        radial-gradient(circle at 25% 50%, rgba(0, 119, 190, 0.16) 0%, transparent 70%),
+        radial-gradient(circle at 75% 50%, rgba(0, 162, 255, 0.14) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(5, 25, 45, 0.85) 0%, rgba(10, 40, 70, 0.88) 50%, rgba(8, 32, 57, 0.85) 100%);
+    filter: blur(0.5px);
+}
+
+.product-card:hover .perfume-bg-nautica {
+    background: linear-gradient(135deg, rgba(10, 32, 55, 0.9) 0%, rgba(15, 50, 80, 0.92) 50%, rgba(12, 40, 67, 0.9) 100%);
+    background-image: 
+        radial-gradient(circle at 25% 50%, rgba(0, 119, 190, 0.22) 0%, transparent 70%),
+        radial-gradient(circle at 75% 50%, rgba(0, 162, 255, 0.2) 0%, transparent 70%);
+    filter: blur(0.3px);
+}
+
+/* Le Male Le Parfum - Oriental, dulce - Púrpura/Rosa Elegante */
+.perfume-bg-lemale {
+    background: linear-gradient(135deg, rgba(40, 20, 50, 0.85) 0%, rgba(60, 30, 70, 0.88) 50%, rgba(50, 25, 60, 0.85) 100%);
+    background-image: 
+        radial-gradient(circle at 30% 45%, rgba(138, 43, 226, 0.14) 0%, transparent 70%),
+        radial-gradient(circle at 70% 55%, rgba(186, 85, 211, 0.12) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(40, 20, 50, 0.85) 0%, rgba(60, 30, 70, 0.88) 50%, rgba(50, 25, 60, 0.85) 100%);
+    filter: blur(0.5px);
+}
+
+.product-card:hover .perfume-bg-lemale {
+    background: linear-gradient(135deg, rgba(50, 25, 60, 0.9) 0%, rgba(70, 38, 80, 0.92) 50%, rgba(60, 32, 70, 0.9) 100%);
+    background-image: 
+        radial-gradient(circle at 30% 45%, rgba(138, 43, 226, 0.2) 0%, transparent 70%),
+        radial-gradient(circle at 70% 55%, rgba(186, 85, 211, 0.18) 0%, transparent 70%);
+    filter: blur(0.3px);
 }
 
 .product-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center center;
     transition: var(--transition-normal);
     display: block;
+    filter: brightness(1.02) contrast(1.02);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-radius: 12px 12px 0 0;
 }
+
 
 .product-card:hover .product-image img {
     transform: scale(1.05);
+    filter: brightness(1.05) contrast(1.05);
 }
 
 .product-placeholder {
@@ -411,7 +567,7 @@ body {
 .product-image:not(:has(img)) .product-placeholder {
     display: flex;
     position: absolute;
-    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+    background: transparent;
 }
 
 /* Ocultar placeholder cuando la imagen se carga correctamente */
@@ -880,6 +1036,12 @@ body {
         grid-template-columns: 1fr;
     }
     
+    .product-image {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        padding: 0;
+    }
+    
     .perfume-types {
         padding: var(--spacing-xs) 0;
     }
@@ -946,6 +1108,17 @@ body {
     
     .navbar {
         padding: 0.75rem 0;
+    }
+    
+    .product-image {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        padding: 0;
+    }
+    
+    .product-image img {
+        object-fit: cover;
+        border-radius: 12px 12px 0 0;
     }
 }
 
