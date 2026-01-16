@@ -1,322 +1,656 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parfum.zip - Fragancias Premium</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          boxShadow: {
-            'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
-            'glow': '0 0 20px rgba(0, 0, 0, 0.1)',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    .text-gradient {
-      background: linear-gradient(to right, #000, #1f2937, #000);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .glass-effect {
-      backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .hover-lift {
-      transition: transform 0.3s;
-    }
-    .hover-lift:hover {
-      transform: translateY(-8px);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfumes Zacatecas - Fragancias Premium</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-white text-gray-900">
-  <!-- Navbar -->
-  <nav class="sticky top-0 z-50 glass-effect border-b border-gray-100 shadow-soft">
-    <div class="container mx-auto px-4">
-      <div class="flex items-center justify-between h-20">
-        <a href="index.html" class="text-3xl font-bold text-gradient tracking-tight">
-          Parfum.zip
-        </a>
-
-        <div class="hidden md:flex items-center gap-10">
-          <a href="index.html" class="text-gray-700 hover:text-black transition-colors font-medium relative group">
-            Inicio
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
-          </a>
-          <a href="shop.html" class="text-gray-700 hover:text-black transition-colors font-medium relative group">
-            Tienda
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
-          </a>
-          <a href="contact.html" class="text-gray-700 hover:text-black transition-colors font-medium relative group">
-            Contacto
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
-          </a>
-        </div>
-
-        <div class="flex items-center gap-6">
-          <a href="cart.html" class="relative group">
-            <svg class="h-6 w-6 text-gray-700 group-hover:text-black transition-all group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-            <span id="cart-badge" class="absolute -top-2 -right-2 bg-gradient-to-r from-black to-gray-800 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center shadow-glow animate-pulse" style="display: none;">0</span>
-          </a>
-
-          <button class="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors" id="mobile-menu-btn" aria-label="Toggle menu">
-            <svg class="h-6 w-6" id="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <div class="md:hidden py-6 border-t border-gray-100 hidden" id="mobile-menu">
-        <div class="flex flex-col gap-4">
-          <a href="index.html" class="text-gray-700 hover:text-black font-medium py-2">Inicio</a>
-          <a href="shop.html" class="text-gray-700 hover:text-black font-medium py-2">Tienda</a>
-          <a href="contact.html" class="text-gray-700 hover:text-black font-medium py-2">Contacto</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-gray-900 to-black">
-    <div class="absolute inset-0 opacity-30" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.02\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="max-w-4xl mx-auto text-center">
-        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-8">
-          <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-          </svg>
-          <span class="text-sm text-white font-medium">Colección Premium 2024</span>
-        </div>
-        <h1 class="text-6xl md:text-8xl font-bold mb-6 text-white leading-tight">
-          Fragancias que
-          <span class="block bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
-            definen tu esencia
-          </span>
-        </h1>
-        <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-          Descubre nuestra exclusiva colección de decants premium. 
-          Prueba fragancias auténticas en formato práctico de 5ml y 10ml.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="shop.html" class="bg-white text-black hover:bg-gray-100 font-semibold px-8 py-6 text-lg shadow-2xl hover:scale-105 transition-transform rounded-lg inline-flex items-center justify-center">
-            Explorar catálogo
-            <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-          </a>
-          <a href="shop.html?filter=new" class="border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-lg backdrop-blur-sm rounded-lg">
-            Ver nuevos
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
-  </section>
-
-  <!-- Nuevos -->
-  <section class="container mx-auto px-4 py-24" id="new-products-section">
-    <div class="flex justify-between items-center mb-12">
-      <div>
-        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Nuevas llegadas</p>
-        <h2 class="text-4xl md:text-5xl font-bold text-gradient">Nuevos</h2>
-      </div>
-      <a href="shop.html?filter=new" class="text-gray-600 hover:text-black font-semibold flex items-center gap-2 group">
-        Ver todos
-        <svg class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
-      </a>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="new-products"></div>
-  </section>
-
-  <!-- Más vendidos -->
-  <section class="container mx-auto px-4 py-24 bg-gradient-to-b from-gray-50 to-white" id="bestsellers-section">
-    <div class="flex justify-between items-center mb-12">
-      <div>
-        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Los favoritos</p>
-        <h2 class="text-4xl md:text-5xl font-bold text-gradient">Más vendidos</h2>
-      </div>
-      <a href="shop.html?filter=bestseller" class="text-gray-600 hover:text-black font-semibold flex items-center gap-2 group">
-        Ver todos
-        <svg class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
-      </a>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="bestsellers"></div>
-  </section>
-
-  <!-- Beneficios -->
-  <section class="container mx-auto px-4 py-24 bg-black text-white relative overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05),transparent_50%)]"></div>
-    <div class="relative z-10">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4">Por qué elegirnos</h2>
-        <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-          Comprometidos con la excelencia en cada detalle
-        </p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-        <div class="text-center group">
-          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 group-hover:bg-white/20 transition-all group-hover:scale-110">
-            <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-bold mb-3">Envío Gratuito</h3>
-          <p class="text-gray-400 leading-relaxed">En compras superiores a $1,500. Entrega rápida y segura.</p>
-        </div>
-        <div class="text-center group">
-          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 group-hover:bg-white/20 transition-all group-hover:scale-110">
-            <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-bold mb-3">100% Auténticos</h3>
-          <p class="text-gray-400 leading-relaxed">Garantía de originalidad. Todos nuestros productos son verificados.</p>
-        </div>
-        <div class="text-center group">
-          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 group-hover:bg-white/20 transition-all group-hover:scale-110">
-            <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-2xl font-bold mb-3">Soporte 24/7</h3>
-          <p class="text-gray-400 leading-relaxed">Estamos aquí para ayudarte en cualquier momento.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gradient-to-b from-black to-gray-900 text-white mt-32 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.02\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
-    <div class="container mx-auto px-4 py-16 relative z-10">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div>
-          <h3 class="text-2xl font-bold mb-4 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Parfum.zip</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Fragancias premium y exclusivas para los amantes del perfume. 
-            Cada fragancia cuenta una historia única.
-          </p>
-        </div>
-        <div>
-          <h4 class="font-bold mb-6 text-white">Enlaces</h4>
-          <ul class="space-y-3 text-gray-400 text-sm">
-            <li><a href="index.html" class="hover:text-white transition-colors flex items-center gap-2 group"><span class="w-0 h-0.5 bg-white group-hover:w-4 transition-all"></span>Inicio</a></li>
-            <li><a href="shop.html" class="hover:text-white transition-colors flex items-center gap-2 group"><span class="w-0 h-0.5 bg-white group-hover:w-4 transition-all"></span>Tienda</a></li>
-            <li><a href="contact.html" class="hover:text-white transition-colors flex items-center gap-2 group"><span class="w-0 h-0.5 bg-white group-hover:w-4 transition-all"></span>Contacto</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-bold mb-6 text-white">Información</h4>
-          <ul class="space-y-3 text-gray-400 text-sm">
-            <li class="flex items-center gap-2"><span class="text-white">✓</span>Envío gratuito</li>
-            <li class="flex items-center gap-2"><span class="text-white">✓</span>Productos auténticos</li>
-            <li class="flex items-center gap-2"><span class="text-white">✓</span>Soporte 24/7</li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-bold mb-6 text-white">Contacto</h4>
-          <ul class="space-y-3 text-gray-400 text-sm">
-            <li>
-              <span class="text-gray-500">Email:</span><br>
-              <a href="mailto:contacto@parfum.zip" class="hover:text-white transition-colors">contacto@parfum.zip</a>
-            </li>
-            <li>
-              <span class="text-gray-500">Ubicación:</span><br>
-              Ciudad de México, México
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="mt-16 pt-8 border-t border-gray-800 text-center">
-        <p class="text-gray-500 text-sm">
-          &copy; <span id="current-year"></span> Parfum.zip. Todos los derechos reservados.
-        </p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/products.js"></script>
-  <script src="js/store.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/app.js"></script>
-  <script>
-    // Mobile menu toggle
-    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-      const menu = document.getElementById('mobile-menu')
-      menu.classList.toggle('hidden')
-    })
-
-    // Set current year
-    document.getElementById('current-year').textContent = new Date().getFullYear()
-
-    // Load products
-    function renderProductCard(product) {
-      const minPrice = Math.min(...product.sizes.map(s => s.price))
-      const maxPrice = Math.max(...product.sizes.map(s => s.price))
-      const minSize = Math.min(...product.sizes.map(s => s.ml))
-      const maxSize = Math.max(...product.sizes.map(s => s.ml))
-      
-      return `
-        <div class="group overflow-hidden hover:shadow-glow transition-all duration-300 hover-lift border-0 shadow-soft rounded-lg bg-white">
-          <a href="product.html?id=${product.id}">
-            <div class="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
-              <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              ${product.isNew ? `<span class="absolute top-3 left-3 bg-gradient-to-r from-black to-gray-800 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">✨ Nuevo</span>` : ''}
-              ${product.isBestSeller ? `<span class="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-black text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg border border-gray-200">⭐ Más vendido</span>` : ''}
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo" data-aos="fade-right">
+                        <span class="logo-text-1">Perfumes</span>
+                        <span class="logo-text-2">Zacatecas</span>
+                    </div>
+                    <ul class="nav-menu" data-aos="fade-left">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
             </div>
-          </a>
-          <div class="p-6">
-            <a href="product.html?id=${product.id}">
-              <p class="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">${product.brand}</p>
-              <h3 class="font-bold text-xl mb-3 line-clamp-2 group-hover:text-gray-600 transition-colors min-h-[3rem]">${product.name}</h3>
-            </a>
-            <div class="flex items-end justify-between mb-4">
-              <div>
-                ${minPrice === maxPrice ? `<p class="text-2xl font-bold text-black">${formatCurrency(minPrice)}</p>` : `<p class="text-2xl font-bold text-black">${formatCurrency(minPrice)} - ${formatCurrency(maxPrice)}</p>`}
-                <p class="text-xs text-gray-500 mt-1 font-semibold">Decant ${minSize}ml / ${maxSize}ml</p>
-              </div>
-            </div>
-            <a href="product.html?id=${product.id}" class="w-full gap-2 bg-black hover:bg-gray-800 text-white font-semibold h-11 transition-all hover:scale-105 shadow-lg hover:shadow-xl rounded-lg flex items-center justify-center">
-              Ver detalles
-            </a>
-          </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="hero-video.mp4" type="video/mp4">
+            <!-- Fallback si el video no carga -->
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content" data-aos="fade-up">
+            <p class="hero-subtitle">Descubre nuestra colección</p>
+            <h1 class="hero-title">Fragancias que Definen tu Estilo</h1>
+            <a href="#productos" class="btn btn-primary">Explorar Colección</a>
         </div>
-      `
-    }
+    </section>
 
-    // Render sections
-    const newProducts = products.filter(p => p.isNew).slice(0, 4)
-    const bestSellers = products.filter(p => p.isBestSeller).slice(0, 4)
+    <!-- Products Section -->
+    <section id="productos" class="products-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Nuestro Catálogo</h2>
+                <p class="section-subtitle">Elige el tamaño perfecto para ti</p>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Product 1: Invictus Victory Elixir -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-image">
+                        <img src="img/invictus-victory-elixir.jpg" alt="Invictus Victory Elixir" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="product-placeholder">Invictus Victory Elixir</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Invictus Victory Elixir</h3>
+                        <p class="product-brand">Paco Rabanne</p>
+                        
+                        <!-- Perfume Type Indicators -->
+                        <div class="perfume-types">
+                            <div class="type-indicator">
+                                <span class="type-label">Dulce</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Amaderado</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Especiado</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Notes -->
+                        <div class="perfume-notes">
+                            <div class="note-section">
+                                <span class="note-icon">🌿</span>
+                                <span class="note-text">Lavanda, Cardamomo, Pimienta Negra</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🕯️</span>
+                                <span class="note-text">Incienso, Pachulí</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🍯</span>
+                                <span class="note-text">Vainilla, Haba Tonka</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-sizes">
+                            <label for="ivictory-size">Tamaño:</label>
+                            <select id="ivictory-size" class="size-select" data-product="Invictus Victory Elixir">
+                                <option value="5ml-130" data-price="130">5ml - $130</option>
+                                <option value="10ml-na" disabled>10ml - No disponible</option>
+                            </select>
+                        </div>
+                        <div class="product-price">$130</div>
+                        <div class="product-quantity">
+                            <label for="ivictory-quantity">Cantidad:</label>
+                            <input type="number" id="ivictory-quantity" class="quantity-input" min="1" max="99" value="1">
+                        </div>
+                        <button class="btn btn-add" data-product-id="ivictory" data-product-name="Invictus Victory Elixir" data-price="130" data-size="5ml">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
 
-    if (newProducts.length > 0) {
-      document.getElementById('new-products').innerHTML = newProducts.map(renderProductCard).join('')
-    } else {
-      document.getElementById('new-products-section').style.display = 'none'
-    }
+                <!-- Product 2: Le Beau -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-image">
+                        <img src="img/le-beau.jpg" alt="Le Beau" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="product-placeholder">Le Beau</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Le Beau</h3>
+                        <p class="product-brand">Jean Paul Gaultier</p>
+                        
+                        <!-- Perfume Type Indicators -->
+                        <div class="perfume-types">
+                            <div class="type-indicator">
+                                <span class="type-label">Dulce</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Cítrico</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Fresco</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Notes -->
+                        <div class="perfume-notes">
+                            <div class="note-section">
+                                <span class="note-icon">🍋</span>
+                                <span class="note-text">Bergamota, Lima</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🥥</span>
+                                <span class="note-text">Coco, Almendra</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🪵</span>
+                                <span class="note-text">Ámbar, Almizcle</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-sizes">
+                            <label for="lebeau-size">Tamaño:</label>
+                            <select id="lebeau-size" class="size-select" data-product="Le Beau">
+                                <option value="5ml-115" data-price="115">5ml - $115</option>
+                                <option value="10ml-205" data-price="205">10ml - $205</option>
+                            </select>
+                        </div>
+                        <div class="product-price">$115</div>
+                        <div class="product-quantity">
+                            <label for="lebeau-quantity">Cantidad:</label>
+                            <input type="number" id="lebeau-quantity" class="quantity-input" min="1" max="99" value="1">
+                        </div>
+                        <button class="btn btn-add" data-product-id="lebeau" data-product-name="Le Beau" data-price="115" data-size="5ml">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
 
-    if (bestSellers.length > 0) {
-      document.getElementById('bestsellers').innerHTML = bestSellers.map(renderProductCard).join('')
-    } else {
-      document.getElementById('bestsellers-section').style.display = 'none'
-    }
-  </script>
+                <!-- Product 3: Azzaro The Most Wanted Intense -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-image">
+                        <img src="img/azzaro-most-wanted-intense.jpg" alt="Azzaro The Most Wanted Intense" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="product-placeholder">Azzaro The Most Wanted Intense</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">The Most Wanted Intense</h3>
+                        <p class="product-brand">Azzaro</p>
+                        
+                        <!-- Perfume Type Indicators -->
+                        <div class="perfume-types">
+                            <div class="type-indicator">
+                                <span class="type-label">Especiado</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Dulce</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Amaderado</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Notes -->
+                        <div class="perfume-notes">
+                            <div class="note-section">
+                                <span class="note-icon">🌶️</span>
+                                <span class="note-text">Cardamomo, Jengibre</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🥃</span>
+                                <span class="note-text">Ron, Caramelo</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🪵</span>
+                                <span class="note-text">Sándalo, Vainilla</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-sizes">
+                            <label for="azzaro-size">Tamaño:</label>
+                            <select id="azzaro-size" class="size-select" data-product="Azzaro The Most Wanted Intense">
+                                <option value="5ml-115" data-price="115">5ml - $115</option>
+                                <option value="10ml-205" data-price="205">10ml - $205</option>
+                            </select>
+                        </div>
+                        <div class="product-price">$115</div>
+                        <div class="product-quantity">
+                            <label for="azzaro-quantity">Cantidad:</label>
+                            <input type="number" id="azzaro-quantity" class="quantity-input" min="1" max="99" value="1">
+                        </div>
+                        <button class="btn btn-add" data-product-id="azzaro" data-product-name="Azzaro The Most Wanted Intense" data-price="115" data-size="5ml">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 4: Invictus Victory (Versión estándar) -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="product-image">
+                        <img src="img/invictus-victory.jpg" alt="Invictus Victory" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="product-placeholder">Invictus Victory</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Invictus Victory</h3>
+                        <p class="product-brand">Paco Rabanne (Versión Estándar)</p>
+                        
+                        <!-- Perfume Type Indicators -->
+                        <div class="perfume-types">
+                            <div class="type-indicator">
+                                <span class="type-label">Fresco</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Acuático</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Dulce</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Notes -->
+                        <div class="perfume-notes">
+                            <div class="note-section">
+                                <span class="note-icon">🍊</span>
+                                <span class="note-text">Pomelo Rosa, Bergamota</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🌊</span>
+                                <span class="note-text">Notas Acuáticas, Manzana</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🪵</span>
+                                <span class="note-text">Ámbar Gris, Patchouli, Vetiver</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-sizes">
+                            <label for="ivictory-std-size">Tamaño:</label>
+                            <select id="ivictory-std-size" class="size-select" data-product="Invictus Victory (Estándar)">
+                                <option value="5ml-75" data-price="75">5ml - $75</option>
+                                <option value="10ml-140" data-price="140">10ml - $140</option>
+                            </select>
+                        </div>
+                        <div class="product-price">$75</div>
+                        <div class="product-quantity">
+                            <label for="ivictory-std-quantity">Cantidad:</label>
+                            <input type="number" id="ivictory-std-quantity" class="quantity-input" min="1" max="99" value="1">
+                        </div>
+                        <button class="btn btn-add" data-product-id="ivictory-std" data-product-name="Invictus Victory (Estándar)" data-price="75" data-size="5ml">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 5: 1 Million Royale -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-image">
+                        <img src="img/1-million.jpg" alt="1 Million Royale" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="product-placeholder">1 Million Royale</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">1 Million Royale</h3>
+                        <p class="product-brand">Paco Rabanne</p>
+                        
+                        <!-- Perfume Type Indicators -->
+                        <div class="perfume-types">
+                            <div class="type-indicator">
+                                <span class="type-label">Amaderado</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Cálido</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Fresco</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Notes -->
+                        <div class="perfume-notes">
+                            <div class="note-section">
+                                <span class="note-icon">🌶️</span>
+                                <span class="note-text">Cardamomo, Mandarina, Bergamota</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🌿</span>
+                                <span class="note-text">Lavanda, Salvia, Hoja de Violeta</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🪵</span>
+                                <span class="note-text">Benjuí, Cedro, Pachulí</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-sizes">
+                            <label for="million-size">Tamaño:</label>
+                            <select id="million-size" class="size-select" data-product="1 Million Royale">
+                                <option value="5ml-85" data-price="85">5ml - $85</option>
+                                <option value="10ml-160" data-price="160">10ml - $160</option>
+                            </select>
+                        </div>
+                        <div class="product-price">$85</div>
+                        <div class="product-quantity">
+                            <label for="million-quantity">Cantidad:</label>
+                            <input type="number" id="million-quantity" class="quantity-input" min="1" max="99" value="1">
+                        </div>
+                        <button class="btn btn-add" data-product-id="million" data-product-name="1 Million Royale" data-price="85" data-size="5ml">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 6: Hawas for Him -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-image">
+                        <img src="img/hawas-for-him.jpg" alt="Hawas for Him" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="product-placeholder">Hawas for Him</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Hawas for Him</h3>
+                        <p class="product-brand">Rasasi</p>
+                        
+                        <!-- Perfume Type Indicators -->
+                        <div class="perfume-types">
+                            <div class="type-indicator">
+                                <span class="type-label">Fresco</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Acuático</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Cítrico</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Notes -->
+                        <div class="perfume-notes">
+                            <div class="note-section">
+                                <span class="note-icon">🍊</span>
+                                <span class="note-text">Mandarina, Bergamota</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🌊</span>
+                                <span class="note-text">Manzana Acuática</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🪵</span>
+                                <span class="note-text">Sándalo, Almizcle</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-sizes">
+                            <label for="hawas-size">Tamaño:</label>
+                            <select id="hawas-size" class="size-select" data-product="Hawas for Him">
+                                <option value="5ml-40" data-price="40">5ml - $40</option>
+                                <option value="10ml-70" data-price="70">10ml - $70</option>
+                            </select>
+                        </div>
+                        <div class="product-price">$40</div>
+                        <div class="product-quantity">
+                            <label for="hawas-quantity">Cantidad:</label>
+                            <input type="number" id="hawas-quantity" class="quantity-input" min="1" max="99" value="1">
+                        </div>
+                        <button class="btn btn-add" data-product-id="hawas" data-product-name="Hawas for Him" data-price="40" data-size="5ml">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 7: Nautica Voyage -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-image">
+                        <img src="img/nautica-voyage.jpg" alt="Nautica Voyage" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="product-placeholder">Nautica Voyage</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Nautica Voyage</h3>
+                        <p class="product-brand">Nautica</p>
+                        
+                        <!-- Perfume Type Indicators -->
+                        <div class="perfume-types">
+                            <div class="type-indicator">
+                                <span class="type-label">Fresco</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Acuático</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Cítrico</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Notes -->
+                        <div class="perfume-notes">
+                            <div class="note-section">
+                                <span class="note-icon">🌿</span>
+                                <span class="note-text">Hojas Verdes, Manzana</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🌸</span>
+                                <span class="note-text">Loto, Mimosa</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🪵</span>
+                                <span class="note-text">Almizcle, Cedro, Musgo de Roble, Ámbar</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-sizes">
+                            <label for="nautica-size">Tamaño:</label>
+                            <select id="nautica-size" class="size-select" data-product="Nautica Voyage">
+                                <option value="5ml-27" data-price="27">5ml - $27</option>
+                                <option value="10ml-50" data-price="50">10ml - $50</option>
+                            </select>
+                        </div>
+                        <div class="product-price">$27</div>
+                        <div class="product-quantity">
+                            <label for="nautica-quantity">Cantidad:</label>
+                            <input type="number" id="nautica-quantity" class="quantity-input" min="1" max="99" value="1">
+                        </div>
+                        <button class="btn btn-add" data-product-id="nautica" data-product-name="Nautica Voyage" data-price="27" data-size="5ml">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 8: Le Male -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="product-image">
+                        <img src="img/le-male.jpg" alt="Le Male" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="product-placeholder">Le Male</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Le Male</h3>
+                        <p class="product-brand">Jean Paul Gaultier</p>
+                        
+                        <!-- Perfume Type Indicators -->
+                        <div class="perfume-types">
+                            <div class="type-indicator">
+                                <span class="type-label">Aromático</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Dulce</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div class="type-indicator">
+                                <span class="type-label">Especiado</span>
+                                <div class="type-bar">
+                                    <div class="type-level" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Notes -->
+                        <div class="perfume-notes">
+                            <div class="note-section">
+                                <span class="note-icon">🌿</span>
+                                <span class="note-text">Lavanda, Menta, Cardamomo, Bergamota</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🌶️</span>
+                                <span class="note-text">Canela, Flor de Azahar, Alcaravea</span>
+                            </div>
+                            <div class="note-section">
+                                <span class="note-icon">🍯</span>
+                                <span class="note-text">Vainilla, Haba Tonka, Ámbar, Sándalo</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-sizes">
+                            <label for="le-male-size">Tamaño:</label>
+                            <select id="le-male-size" class="size-select" data-product="Le Male">
+                                <option value="5ml-110" data-price="110">5ml - $110</option>
+                                <option value="10ml-200" data-price="200">10ml - $200</option>
+                            </select>
+                        </div>
+                        <div class="product-price">$110</div>
+                        <div class="product-quantity">
+                            <label for="le-male-quantity">Cantidad:</label>
+                            <input type="number" id="le-male-quantity" class="quantity-input" min="1" max="99" value="1">
+                        </div>
+                        <button class="btn btn-add" data-product-id="le-male" data-product-name="Le Male" data-price="110" data-size="5ml">
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="contact-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Síguenos en Redes Sociales</h2>
+                <p class="section-subtitle">Conecta con nosotros y descubre más fragancias</p>
+            </div>
+            <div class="social-buttons" data-aos="fade-up" data-aos-delay="200">
+                <a href="https://instagram.com/jayyd.zip" target="_blank" class="btn btn-social btn-instagram">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    Instagram
+                </a>
+                <a href="https://wa.me/524941125352" target="_blank" class="btn btn-social btn-whatsapp">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Perfumes Zacatecas. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Cart Button -->
+    <button class="cart-float" id="cartFloat">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.15.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+        </svg>
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h2>Tu Carrito</h2>
+                <button class="cart-close" id="cartClose">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p class="cart-empty">Tu carrito está vacío</p>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total: $<span id="cartTotal">0</span></strong>
+                </div>
+                <button class="btn btn-primary btn-checkout" id="checkoutBtn">Realizar Pedido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Main Script -->
+    <script src="script.js"></script>
 </body>
 </html>
-
