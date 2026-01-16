@@ -162,14 +162,22 @@ body {
     padding-top: 80px;
 }
 
-.hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
+.hero-bg-image {
+    /* Imagen por defecto para computadoras */
+    background-image: url('ciber.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Imagen para móviles (se mostrará solo en pantallas pequeñas) */
+@media (max-width: 768px) {
+    .hero-bg-image {
+        /* Cambiar la imagen para móviles */
+        background-image: url('ciber-mobile.jpg');
+        background-attachment: scroll;
+    }
 }
 
 .hero-overlay {
@@ -1061,8 +1069,32 @@ body {
     }
     
     .hero {
-        min-height: 80vh;
-        padding-top: 100px;
+        min-height: 100vh;
+        padding-top: 80px;
+    }
+    
+    .hero-bg-image {
+        background-attachment: scroll;
+        background-position: center center;
+        background-size: cover;
+    }
+    
+    .hero-overlay {
+        background: radial-gradient(circle at center, rgba(10, 10, 10, 0.5) 0%, rgba(10, 10, 10, 0.75) 100%);
+    }
+    
+    .hero-content {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+    
+    .hero-title {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(1rem, 3vw, 1.2rem);
+        margin-bottom: var(--spacing-md);
     }
     
     .cart-float {
@@ -1108,6 +1140,35 @@ body {
     
     .navbar {
         padding: 0.75rem 0;
+    }
+    
+    .hero {
+        min-height: 100vh;
+        padding-top: 70px;
+    }
+    
+    .hero-bg-image {
+        background-attachment: scroll;
+        background-position: center center;
+        background-size: cover;
+    }
+    
+    .hero-overlay {
+        background: radial-gradient(circle at center, rgba(10, 10, 10, 0.4) 0%, rgba(10, 10, 10, 0.7) 100%);
+    }
+    
+    .hero-content {
+        padding: var(--spacing-sm);
+    }
+    
+    .hero-title {
+        font-size: clamp(1.6rem, 7vw, 2.2rem);
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+        margin-bottom: var(--spacing-sm);
     }
     
     .product-image {

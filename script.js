@@ -10,14 +10,6 @@ AOS.init({
     offset: 100
 });
 
-// Aumentar velocidad del video de fondo
-document.addEventListener('DOMContentLoaded', function() {
-    const heroVideo = document.querySelector('.hero-video');
-    if (heroVideo) {
-        heroVideo.playbackRate = 1.5; // 1.5x más rápido (puedes ajustar: 1.5 = 50% más rápido, 2 = doble velocidad)
-    }
-});
-
 // Estado del carrito
 let cart = [];
 const CART_STORAGE_KEY = 'perfumesZacatecas_cart';
