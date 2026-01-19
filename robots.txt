@@ -1,0 +1,25 @@
+# robots.txt para Perfumes Zacatecas
+# Permite a todos los crawlers indexar el sitio
+
+User-agent: *
+Allow: /
+
+# Permitir acceso a recursos estáticos
+Allow: /style.css
+Allow: /script.js
+Allow: /img/
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.webp
+
+# Bloquear carpetas innecesarias
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /*.json$
+
+# Sitemap
+Sitemap: https://perfumeszacatecas.com.mx/sitemap.xml
+
+# Crawl-delay (opcional, para no sobrecargar el servidor)
+Crawl-delay: 1
