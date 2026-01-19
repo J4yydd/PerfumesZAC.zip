@@ -7,7 +7,7 @@
     <!-- Primary Meta Tags -->
     <title>Perfumes Zacatecas - Fragancias Premium y Decants | Tienda Online</title>
     <meta name="title" content="Perfumes Zacatecas - Fragancias Premium y Decants | Tienda Online">
-    <meta name="description" content="Tienda especializada en perfumes premium y decants en Zacatecas. Compre Invictus, Le Beau, Azzaro, 1 Million Royale y más. Envíos disponibles. WhatsApp: 4941125352">
+    <meta name="description" content="Encuentra el mejor perfume para ti, con los mejores precios y atención inmediata por nuestras redes sociales.">
     <meta name="keywords" content="perfumes zacatecas, decants zacatecas, fragancias premium, perfumes importados, invictus victory elixir, le beau, azzaro most wanted, 1 million royale, hawas, nautica voyage, le male le parfum, perfumes baratos zacatecas, perfumería zacatecas">
     <meta name="author" content="Perfumes Zacatecas">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -29,7 +29,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://perfumeszacatecas.com.mx/">
     <meta property="og:title" content="Perfumes Zacatecas - Fragancias Premium y Decants">
-    <meta property="og:description" content="Tienda especializada en perfumes premium y decants en Zacatecas. Descubre nuestra colección de fragancias importadas de las mejores marcas.">
+    <meta property="og:description" content="Encuentra el mejor perfume para ti, con los mejores precios y atención inmediata por nuestras redes sociales.">
     <meta property="og:image" content="https://perfumeszacatecas.com.mx/ciber.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -41,7 +41,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://perfumeszacatecas.com.mx/">
     <meta name="twitter:title" content="Perfumes Zacatecas - Fragancias Premium y Decants">
-    <meta name="twitter:description" content="Tienda especializada en perfumes premium y decants en Zacatecas. Descubre nuestra colección de fragancias importadas.">
+    <meta name="twitter:description" content="Encuentra el mejor perfume para ti, con los mejores precios y atención inmediata por nuestras redes sociales.">
     <meta name="twitter:image" content="https://perfumeszacatecas.com.mx/ciber.jpg">
     <meta name="twitter:image:alt" content="Perfumes Zacatecas - Fragancias Premium">
     <meta name="twitter:creator" content="@jayyd.zip">
@@ -744,17 +744,35 @@
     <div class="cart-modal" id="cartModal">
         <div class="cart-modal-content">
             <div class="cart-modal-header">
-                <h2>Tu Carrito</h2>
+                <div class="cart-modal-tabs">
+                    <button class="cart-tab-btn active" id="cartTab">Carrito</button>
+                    <button class="cart-tab-btn" id="historyTab">Historial</button>
+                </div>
                 <button class="cart-close" id="cartClose">&times;</button>
             </div>
-            <div class="cart-items" id="cartItems">
-                <p class="cart-empty">Tu carrito está vacío</p>
-            </div>
-            <div class="cart-footer">
-                <div class="cart-total">
-                    <strong>Total: $<span id="cartTotal">0</span></strong>
+            
+            <!-- Contenido del Carrito -->
+            <div class="cart-content active" id="cartContent">
+                <div class="cart-items" id="cartItems">
+                    <p class="cart-empty">Tu carrito está vacío</p>
                 </div>
-                <button class="btn btn-primary btn-checkout" id="checkoutBtn">Realizar Pedido</button>
+                <div class="cart-footer">
+                    <div class="cart-total">
+                        <strong>Total: $<span id="cartTotal">0</span></strong>
+                    </div>
+                    <button class="btn btn-primary btn-checkout" id="checkoutBtn">Realizar Pedido</button>
+                </div>
+            </div>
+            
+            <!-- Contenido del Historial -->
+            <div class="cart-content" id="historyContent">
+                <div class="history-header">
+                    <h3>Historial de Pedidos</h3>
+                    <button class="btn btn-clear-history" id="clearHistoryBtn" style="display: none;">Borrar Todo</button>
+                </div>
+                <div class="history-items" id="orderHistoryItems">
+                    <p class="history-empty">No hay pedidos en el historial</p>
+                </div>
             </div>
         </div>
     </div>

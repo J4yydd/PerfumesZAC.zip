@@ -14,6 +14,10 @@ AOS.init({
 let cart = [];
 const CART_STORAGE_KEY = 'perfumesZacatecas_cart';
 
+// Estado del historial de pedidos
+let orderHistory = [];
+const ORDER_HISTORY_STORAGE_KEY = 'perfumesZacatecas_orderHistory';
+
 // ============================================
 // FUNCIONES DE SEGURIDAD Y SANITIZACIÓN
 // ============================================
@@ -92,6 +96,67 @@ function loadCart() {
             cart = [];
             localStorage.removeItem(CART_STORAGE_KEY);
         }
+    }
+}
+
+// Cargar historial de pedidos desde localStorage
+function loadOrderHistory() {
+    const savedHistory = localStorage.getItem(ORDER_HISTORY_STORAGE_KEY);
+    if (savedHistory) {
+        try {
+            orderHistory = JSON.parse(savedHistory);
+            updateOrderHistoryUI();
+        } catch (error) {
+            console.error('Error al cargar el historial:', error);
+            orderHistory = [];
+            localStorage.removeItem(ORDER_HISTORY_STORAGE_KEY);
+        }
+    }
+}
+
+// Guardar historial de pedidos en localStorage
+function saveOrderHistory() {
+    localStorage.setItem(ORDER_HISTORY_STORAGE_KEY, JSON.stringify(orderHistory));
+}
+
+// Agregar pedido al historial
+function addToOrderHistory(cartItems, total) {
+    const order = {
+        id: Date.now(), // ID único basado en timestamp
+        date: new Date().toISOString(),
+        items: cartItems.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            size: item.size,
+            quantity: item.quantity
+        })),
+        total: total
+    };
+    
+    orderHistory.unshift(order); // Agregar al inicio del array
+    saveOrderHistory();
+    updateOrderHistoryUI();
+}
+
+// Eliminar pedido del historial
+function removeFromOrderHistory(orderId) {
+    orderHistory = orderHistory.filter(order => order.id !== orderId);
+    saveOrderHistory();
+    updateOrderHistoryUI();
+}
+
+// Limpiar todo el historial
+function clearOrderHistory() {
+    if (orderHistory.length === 0) {
+        return;
+    }
+    
+    if (confirm('¿Estás seguro de que quieres borrar todo el historial de pedidos?')) {
+        orderHistory = [];
+        saveOrderHistory();
+        updateOrderHistoryUI();
+        showNotification('Historial borrado', 'success');
     }
 }
 
@@ -327,6 +392,113 @@ function showAddToCartFeedback(quantity = 1) {
     }, 2000);
 }
 
+// Mostrar notificación genérica
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    const bgColor = type === 'success' 
+        ? 'linear-gradient(135deg, #d4af37 0%, #b8941d 100%)' 
+        : 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 30px;
+        background: ${bgColor};
+        color: #0a0a0a;
+        padding: 16px 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+        z-index: 3000;
+        font-weight: 600;
+        animation: slideInRight 0.3s ease;
+        max-width: 300px;
+    `;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => {
+            if (document.body.contains(notification)) {
+                document.body.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// Actualizar UI del historial de pedidos
+function updateOrderHistoryUI() {
+    const historyContainer = document.getElementById('orderHistoryItems');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+    
+    if (!historyContainer) {
+        return;
+    }
+    
+    // Mostrar/ocultar botón de limpiar historial
+    if (clearHistoryBtn) {
+        clearHistoryBtn.style.display = orderHistory.length > 0 ? 'block' : 'none';
+    }
+    
+    if (orderHistory.length === 0) {
+        historyContainer.innerHTML = '<p class="history-empty">No hay pedidos en el historial</p>';
+        return;
+    }
+    
+    historyContainer.innerHTML = orderHistory.map(order => {
+        const orderDate = new Date(order.date);
+        const formattedDate = orderDate.toLocaleDateString('es-MX', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+        const itemsList = order.items.map(item => {
+            const itemTotal = (item.price * item.quantity).toFixed(2);
+            return `
+                <div class="history-item-detail">
+                    <span>${sanitizeString(item.name)} - ${sanitizeString(item.size)} (x${item.quantity})</span>
+                    <span class="history-item-price">$${itemTotal}</span>
+                </div>
+            `;
+        }).join('');
+        
+        return `
+            <div class="history-order-card">
+                <div class="history-order-header">
+                    <div class="history-order-info">
+                        <h4>Pedido #${order.id.toString().slice(-6)}</h4>
+                        <p class="history-order-date">${sanitizeString(formattedDate)}</p>
+                    </div>
+                    <button class="history-order-delete" data-order-id="${order.id}" aria-label="Eliminar pedido">
+                        ×
+                    </button>
+                </div>
+                <div class="history-order-items">
+                    ${itemsList}
+                </div>
+                <div class="history-order-total">
+                    <strong>Total: $${order.total.toFixed(2)}</strong>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    // Agregar event listeners a los botones de eliminar
+    const deleteButtons = historyContainer.querySelectorAll('.history-order-delete');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const orderId = parseInt(this.getAttribute('data-order-id'), 10);
+            if (!isNaN(orderId)) {
+                removeFromOrderHistory(orderId);
+                showNotification('Pedido eliminado del historial', 'success');
+            }
+        });
+    });
+}
+
 // Generar mensaje de WhatsApp
 function generateWhatsAppMessage() {
     if (cart.length === 0) {
@@ -379,6 +551,35 @@ function openWhatsApp() {
         return;
     }
     
+    // Calcular total antes de limpiar el carrito
+    const total = cart.reduce((sum, item) => {
+        const validPrice = validatePositiveNumber(item.price, 0) || 0;
+        const validQuantity = validatePositiveInteger(item.quantity, 1) || 0;
+        const itemTotal = validPrice * validQuantity;
+        return sum + (isNaN(itemTotal) || !isFinite(itemTotal) ? 0 : itemTotal);
+    }, 0);
+    
+    // Guardar una copia del carrito antes de limpiarlo
+    const cartCopy = JSON.parse(JSON.stringify(cart));
+    
+    // Agregar pedido al historial
+    addToOrderHistory(cartCopy, total);
+    
+    // Limpiar el carrito
+    cart = [];
+    saveCart();
+    updateCartUI();
+    
+    // Cerrar el modal del carrito
+    const cartModal = document.getElementById('cartModal');
+    if (cartModal) {
+        cartModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    // Mostrar notificación de éxito
+    showNotification('¡Pedido realizado! El carrito se ha vaciado.', 'success');
+    
     // Construir URL de forma segura con encodeURIComponent
     const baseUrl = 'https://wa.me/';
     const url = `${baseUrl}${sanitizedPhone}?text=${message}`;
@@ -394,6 +595,9 @@ function openWhatsApp() {
 document.addEventListener('DOMContentLoaded', function() {
     // Cargar carrito
     loadCart();
+    
+    // Cargar historial de pedidos
+    loadOrderHistory();
     
     // Inicializar selectores de tamaño
     initializeSizeSelectors();
