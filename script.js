@@ -14,12 +14,84 @@ AOS.init({
 let cart = [];
 const CART_STORAGE_KEY = 'perfumesZacatecas_cart';
 
+// ============================================
+// FUNCIONES DE SEGURIDAD Y SANITIZACIÓN
+// ============================================
+
+/**
+ * Sanitiza una cadena de texto para prevenir ataques XSS
+ * Escapa caracteres HTML peligrosos
+ * @param {string} str - Cadena a sanitizar
+ * @returns {string} - Cadena sanitizada
+ */
+function sanitizeString(str) {
+    if (typeof str !== 'string') {
+        return String(str || '');
+    }
+    
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+/**
+ * Valida que un valor sea un número positivo
+ * @param {number} value - Valor a validar
+ * @param {number} min - Valor mínimo permitido (default: 0)
+ * @param {number} max - Valor máximo permitido (default: Infinity)
+ * @returns {number|null} - Número validado o null si es inválido
+ */
+function validatePositiveNumber(value, min = 0, max = Infinity) {
+    const num = parseFloat(value);
+    if (isNaN(num) || num < min || num > max) {
+        return null;
+    }
+    return num;
+}
+
+/**
+ * Valida que un valor sea un entero positivo
+ * @param {number} value - Valor a validar
+ * @param {number} min - Valor mínimo permitido (default: 1)
+ * @param {number} max - Valor máximo permitido (default: 99)
+ * @returns {number|null} - Entero validado o null si es inválido
+ */
+function validatePositiveInteger(value, min = 1, max = 99) {
+    const num = parseInt(value, 10);
+    if (isNaN(num) || num < min || num > max || !Number.isInteger(parseFloat(value))) {
+        return null;
+    }
+    return num;
+}
+
 // Cargar carrito desde localStorage si existe
 function loadCart() {
     const savedCart = localStorage.getItem(CART_STORAGE_KEY);
     if (savedCart) {
-        cart = JSON.parse(savedCart);
-        updateCartUI();
+        try {
+            const parsedCart = JSON.parse(savedCart);
+            // Validar y sanitizar datos del carrito al cargar
+            cart = parsedCart.filter(item => {
+                return item && 
+                       item.id && 
+                       item.name && 
+                       validatePositiveNumber(item.price, 0) !== null &&
+                       validatePositiveInteger(item.quantity, 1) !== null &&
+                       item.size;
+            }).map(item => ({
+                id: sanitizeString(item.id),
+                name: sanitizeString(item.name),
+                price: validatePositiveNumber(item.price, 0) || 0,
+                size: sanitizeString(item.size),
+                quantity: validatePositiveInteger(item.quantity, 1) || 1
+            }));
+            saveCart();
+            updateCartUI();
+        } catch (error) {
+            console.error('Error al cargar el carrito:', error);
+            cart = [];
+            localStorage.removeItem(CART_STORAGE_KEY);
+        }
     }
 }
 
@@ -62,37 +134,59 @@ function initializeSizeSelectors() {
 
 // Agregar producto al carrito
 function addToCart(productId, productName, price, size, quantity = 1) {
-    // Convertir cantidad a número entero
-    quantity = parseInt(quantity) || 1;
+    // Sanitizar y validar entradas
+    const sanitizedId = sanitizeString(productId || '');
+    const sanitizedName = sanitizeString(productName || '');
+    const sanitizedSize = sanitizeString(size || '');
     
-    // Validar que la cantidad sea mayor a 0
-    if (quantity <= 0) {
-        alert('La cantidad debe ser mayor a 0');
+    // Validar cantidad
+    const validatedQuantity = validatePositiveInteger(quantity, 1, 99);
+    if (!validatedQuantity) {
+        alert('La cantidad debe ser un número entero entre 1 y 99');
+        return;
+    }
+    
+    // Validar precio
+    const validatedPrice = validatePositiveNumber(price, 0);
+    if (!validatedPrice) {
+        alert('El precio debe ser un número positivo válido');
+        return;
+    }
+    
+    // Validar que todos los campos requeridos estén presentes
+    if (!sanitizedId || !sanitizedName || !sanitizedSize) {
+        alert('Error: Faltan datos del producto');
         return;
     }
     
     // Verificar si el producto ya está en el carrito
     const existingItemIndex = cart.findIndex(
-        item => item.id === productId && item.size === size
+        item => item.id === sanitizedId && item.size === sanitizedSize
     );
     
     if (existingItemIndex > -1) {
-        // Si ya existe, sumar la cantidad seleccionada
-        cart[existingItemIndex].quantity += quantity;
+        // Si ya existe, sumar la cantidad seleccionada (con validación)
+        const newQuantity = cart[existingItemIndex].quantity + validatedQuantity;
+        const finalQuantity = validatePositiveInteger(newQuantity, 1, 99);
+        if (!finalQuantity) {
+            alert('La cantidad total no puede exceder 99 unidades');
+            return;
+        }
+        cart[existingItemIndex].quantity = finalQuantity;
     } else {
         // Si no existe, agregarlo con la cantidad seleccionada
         cart.push({
-            id: productId,
-            name: productName,
-            price: parseFloat(price),
-            size: size,
-            quantity: quantity
+            id: sanitizedId,
+            name: sanitizedName,
+            price: validatedPrice,
+            size: sanitizedSize,
+            quantity: validatedQuantity
         });
     }
     
     saveCart();
     updateCartUI();
-    showAddToCartFeedback(quantity);
+    showAddToCartFeedback(validatedQuantity);
 }
 
 // Actualizar UI del carrito
@@ -102,32 +196,82 @@ function updateCartUI() {
     const cartTotal = document.getElementById('cartTotal');
     const cartFloat = document.getElementById('cartFloat');
     
-    // Calcular total
-    const total = cart.reduce((sum, item) => {
-        return sum + (item.price * item.quantity);
-    }, 0);
+    if (!cartCount || !cartItems || !cartTotal || !cartFloat) {
+        console.error('Elementos del carrito no encontrados');
+        return;
+    }
     
-    // Actualizar contador
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.textContent = totalItems;
-    cartTotal.textContent = total.toFixed(2);
+    // Validar y calcular total con seguridad
+    let total = 0;
+    let totalItems = 0;
+    const originalLength = cart.length;
     
-    // Actualizar lista de items
+    // Filtrar items inválidos y calcular total
+    cart = cart.filter(item => {
+        // Validar cada item antes de calcular
+        const validPrice = validatePositiveNumber(item.price, 0);
+        const validQuantity = validatePositiveInteger(item.quantity, 1);
+        
+        if (!validPrice || !validQuantity) {
+            return false; // Remover items inválidos
+        }
+        
+        const itemTotal = validPrice * validQuantity;
+        if (isNaN(itemTotal) || !isFinite(itemTotal)) {
+            return false;
+        }
+        
+        total += itemTotal;
+        totalItems += validQuantity;
+        return true;
+    });
+    
+    // Si se removieron items inválidos, guardar carrito limpio
+    if (cart.length !== originalLength) {
+        saveCart();
+    }
+    
+    // Actualizar contador (sanitizado)
+    cartCount.textContent = totalItems || 0;
+    cartTotal.textContent = (total || 0).toFixed(2);
+    
+    // Actualizar lista de items con sanitización
     if (cart.length === 0) {
         cartItems.innerHTML = '<p class="cart-empty">Tu carrito está vacío</p>';
     } else {
-        cartItems.innerHTML = cart.map((item, index) => `
-            <div class="cart-item">
+        // Usar createElement y textContent para prevenir XSS en lugar de innerHTML
+        cartItems.innerHTML = ''; // Limpiar primero
+        
+        cart.forEach((item, index) => {
+            const cartItemDiv = document.createElement('div');
+            cartItemDiv.className = 'cart-item';
+            
+            // Sanitizar todos los valores antes de mostrarlos
+            const sanitizedName = sanitizeString(item.name || '');
+            const sanitizedSize = sanitizeString(item.size || '');
+            const validQuantity = validatePositiveInteger(item.quantity, 1) || 0;
+            const validPrice = validatePositiveNumber(item.price, 0) || 0;
+            const itemTotal = (validPrice * validQuantity).toFixed(2);
+            
+            cartItemDiv.innerHTML = `
                 <div class="cart-item-info">
-                    <h4>${item.name}</h4>
-                    <p>${item.size} - Cantidad: ${item.quantity}</p>
+                    <h4>${sanitizedName}</h4>
+                    <p>${sanitizedSize} - Cantidad: ${validQuantity}</p>
                 </div>
                 <div class="cart-item-right">
-                    <span class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
-                    <button class="cart-item-remove" onclick="removeFromCart(${index})">×</button>
+                    <span class="cart-item-price">$${itemTotal}</span>
+                    <button class="cart-item-remove" data-index="${index}">×</button>
                 </div>
-            </div>
-        `).join('');
+            `;
+            
+            // Agregar event listener de forma segura (no usar onclick en HTML)
+            const removeBtn = cartItemDiv.querySelector('.cart-item-remove');
+            removeBtn.addEventListener('click', function() {
+                removeFromCart(index);
+            });
+            
+            cartItems.appendChild(cartItemDiv);
+        });
     }
     
     // Mostrar/ocultar botón flotante
@@ -140,7 +284,14 @@ function updateCartUI() {
 
 // Eliminar producto del carrito (función global)
 window.removeFromCart = function(index) {
-    cart.splice(index, 1);
+    // Validar índice
+    const validIndex = parseInt(index, 10);
+    if (isNaN(validIndex) || validIndex < 0 || validIndex >= cart.length) {
+        console.error('Índice inválido para eliminar del carrito');
+        return;
+    }
+    
+    cart.splice(validIndex, 1);
     saveCart();
     updateCartUI();
 };
@@ -180,27 +331,63 @@ function showAddToCartFeedback(quantity = 1) {
 function generateWhatsAppMessage() {
     if (cart.length === 0) {
         alert('Tu carrito está vacío');
-        return;
+        return '';
     }
     
     let message = 'Hola, me interesa realizar el siguiente pedido:\n\n';
     
+    // Validar y sanitizar cada item antes de agregarlo al mensaje
     cart.forEach((item, index) => {
-        message += `${index + 1}. ${item.name} - ${item.size} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
+        const validPrice = validatePositiveNumber(item.price, 0) || 0;
+        const validQuantity = validatePositiveInteger(item.quantity, 1) || 0;
+        const itemTotal = (validPrice * validQuantity).toFixed(2);
+        
+        // Sanitizar nombre y tamaño para el mensaje (solo texto, sin HTML)
+        const sanitizedName = sanitizeString(item.name || '');
+        const sanitizedSize = sanitizeString(item.size || '');
+        
+        message += `${index + 1}. ${sanitizedName} - ${sanitizedSize} (x${validQuantity}) - $${itemTotal}\n`;
     });
     
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    // Calcular total con validación
+    const total = cart.reduce((sum, item) => {
+        const validPrice = validatePositiveNumber(item.price, 0) || 0;
+        const validQuantity = validatePositiveInteger(item.quantity, 1) || 0;
+        const itemTotal = validPrice * validQuantity;
+        return sum + (isNaN(itemTotal) || !isFinite(itemTotal) ? 0 : itemTotal);
+    }, 0);
+    
     message += `\nTotal: $${total.toFixed(2)}`;
     
+    // Usar encodeURIComponent para seguridad en la URL de WhatsApp
     return encodeURIComponent(message);
 }
 
 // Abrir WhatsApp con mensaje
 function openWhatsApp() {
     const message = generateWhatsAppMessage();
+    if (!message) {
+        return; // Si el mensaje está vacío, no continuar
+    }
+    
+    // Validar y sanitizar número de teléfono
     const phoneNumber = '524941125352';
-    const url = `https://wa.me/${phoneNumber}?text=${message}`;
-    window.open(url, '_blank');
+    const sanitizedPhone = phoneNumber.replace(/[^\d]/g, ''); // Solo números
+    
+    if (!sanitizedPhone || sanitizedPhone.length < 10) {
+        console.error('Número de teléfono inválido');
+        return;
+    }
+    
+    // Construir URL de forma segura con encodeURIComponent
+    const baseUrl = 'https://wa.me/';
+    const url = `${baseUrl}${sanitizedPhone}?text=${message}`;
+    
+    // Abrir con seguridad (rel="noopener noreferrer" se maneja en HTML, pero aquí también aplicamos medidas)
+    const whatsappWindow = window.open(url, '_blank', 'noopener,noreferrer');
+    if (!whatsappWindow) {
+        alert('Por favor, permite las ventanas emergentes para abrir WhatsApp');
+    }
 }
 
 // Event Listeners
